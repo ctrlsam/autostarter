@@ -1,4 +1,4 @@
-# Autostart
+# Autostarter
 
 A Python module for managing startup scripts across different operating systems, requiring no additional dependencies.
 
@@ -7,7 +7,7 @@ A Python module for managing startup scripts across different operating systems,
 To install the module, use `pip`:
 
 ```bash
-pip install autostart
+pip install autostarter
 ```
 
 ## Usage
@@ -15,19 +15,19 @@ pip install autostart
 You can use the "add" method to include a startup script, and the "remove" method to remove a startup script.
 
 ```python
-import autostart
+import autostarter
 import sys
 
 # Add a python script
 script_location = '/path/to/script.py'
-autostart.add(
+autostarter.add(
     script_location,
     identifier='your-app-name',
     interpreter=sys.executable
 )
 
 # Remove a startup script
-autostart.remove('your-app-name')
+autostarter.remove('your-app-name')
 ```
 
 ### API Reference
@@ -62,7 +62,7 @@ Removes the startup script with the specified identifier.
 
 ## Supported Operating Systems
 
-Autostart supports the following operating systems:
+Autostarter supports the following operating systems:
 
 - Windows, tested on Windows 11
 - MacOS, tested on 13.1
@@ -70,9 +70,9 @@ Autostart supports the following operating systems:
 
 ## Contributing
 
-If you want to contribute to Autostart, please fork the repository and make your changes in a separate branch. Then, submit a pull request with a detailed description of your changes.
+If you want to contribute to Autostarter, please fork the repository and make your changes in a separate branch. Then, submit a pull request with a detailed description of your changes.
 
 ## License
 
-Autostart is licensed under the MIT License.
+Autostarter is licensed under the MIT License.
 See [LICENSE](https://github.com/ctrlsam/autostart/blob/main/LICENSE) for more information.

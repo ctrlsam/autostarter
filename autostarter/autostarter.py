@@ -1,4 +1,3 @@
-import re
 import functools
 import importlib
 import platform

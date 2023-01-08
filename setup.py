@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="autostart",
+    name="autostarter",
     version="0.0.1",
     author="Sam Redmond",
     author_email="samredmondtech@gmail.com",
