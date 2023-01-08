@@ -44,14 +44,13 @@ def remove(identifier: str, system_wide: bool = False) -> bool:
 
     Returns: True if the startup script was found and successfully removed, False otherwise.
     """
-    # Remove shell script from autorun directory
-    start_file = f'{_startup_folder(system_wide)}/{identifier}.sh'
+    # Remove desktop and shell script files
+    to_delete = [
+        f'{_startup_folder(system_wide)}/{identifier}.sh',
+        f'{_startup_folder(system_wide)}/{identifier}.desktop'
+    ]
 
-    if os.path.exists(start_file):
-        os.remove(start_file)
-        return True
-
-    return False
+    return all(os.remove(file) for file in to_delete)
 
 def _startup_folder(system_wide):
     """
