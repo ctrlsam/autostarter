@@ -58,7 +58,14 @@ def remove(identifier: str, system_wide: bool = False) -> bool:
         f'{_startup_folder(system_wide)}/{identifier}.sh'
     ]
 
-    return all(os.remove(file) for file in to_delete)
+    try:
+        for file in to_delete:
+            os.remove(file)
+    except Exception as e:
+        print("autostarter - exception occured while removing launch agent: " + str(e))
+        return False
+    
+    return True
 
 def _startup_folder(system_wide: bool) -> str:
     """
