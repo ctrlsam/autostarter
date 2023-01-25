@@ -8,7 +8,7 @@ def _get_os_module():
     """
     Returns the OS-specific module for the current operating system.
     """
-    return importlib.import_module('startup.systems.' + platform.system().lower())
+    return importlib.import_module('autostarter.systems.' + platform.system().lower())
 
 def add(script_location, **kwargs):
     """
