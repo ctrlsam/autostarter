@@ -1,4 +1,5 @@
 import os
+from autostarter.util import remove_list
 
 """
 Windows-specific functions for managing startup scripts.
@@ -35,12 +36,7 @@ def remove(identifier: str, system_wide: bool = False) -> bool:
     """
     # Remove batch script from autorun directory
     start_file = f'{_startup_folder(system_wide)}\\{identifier}.bat'
-
-    if os.path.exists(start_file):
-        os.remove(start_file)
-        return True
-
-    return False
+    return remove_list([start_file])
 
 def _startup_folder(system_wide):
     """

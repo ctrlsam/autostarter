@@ -1,4 +1,5 @@
 import os
+from autostarter.util import remove_list
 
 """
 Linux-specific functions for managing startup scripts.
@@ -49,17 +50,7 @@ def remove(identifier: str, system_wide: bool = False) -> bool:
         f'{_startup_folder(system_wide)}/{identifier}.sh',
         f'{_startup_folder(system_wide)}/{identifier}.desktop'
     ]
-
-    try:
-        for filename in to_delete:
-            os.remove(filename)
-    except FileNotFoundError:
-        print('Startup file tried to be removed, however it was not found')
-    except OSError as err:
-        print('Exception occurred while removing launch files: ' + str(err))
-        return False
-
-    return True
+    return remove_list(to_delete)
 
 def _startup_folder(system_wide):
     """

@@ -1,5 +1,6 @@
 import os
 import plistlib
+from autostarter.util import remove_list
 
 """
 Darwin-specific functions for managing launch agents.
@@ -57,17 +58,7 @@ def remove(identifier: str, system_wide: bool = False) -> bool:
         f'{_startup_folder(system_wide)}/{identifier}.plist',
         f'{_startup_folder(system_wide)}/{identifier}.sh'
     ]
-
-    try:
-        for filename in to_delete:
-            os.remove(filename)
-    except FileNotFoundError:
-        print('Startup file tried to be removed, however it was not found')
-    except OSError as err:
-        print('Exception occurred while removing launch agent: ' + str(err))
-        return False
-
-    return True
+    return remove_list(to_delete)
 
 def _startup_folder(system_wide: bool) -> str:
     """
