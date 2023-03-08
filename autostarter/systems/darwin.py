@@ -50,7 +50,7 @@ def remove(identifier: str, system_wide: bool = False) -> bool:
     system_wide: If True, the launch agent will be removed for all users on the system.
                  If False (default), the launch agent will be removed for the current user only.
 
-    Returns: True if the launch agent was found and successfully removed, False otherwise.
+    Returns: True if the startup script were removed, False otherwise.
     """
     # Remove plist and shell script files
     to_delete = [
@@ -59,12 +59,14 @@ def remove(identifier: str, system_wide: bool = False) -> bool:
     ]
 
     try:
-        for file in to_delete:
-            os.remove(file)
-    except Exception as e:
-        print("autostarter - exception occured while removing launch agent: " + str(e))
+        for filename in to_delete:
+            os.remove(filename)
+    except FileNotFoundError:
+        print('Startup file tried to be removed, however it was not found')
+    except OSError as err:
+        print('Exception occurred while removing launch agent: ' + str(err))
         return False
-    
+
     return True
 
 def _startup_folder(system_wide: bool) -> str:
