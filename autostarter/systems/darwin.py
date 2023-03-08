@@ -1,5 +1,6 @@
 import os
 import plistlib
+from autostarter.util import remove_list
 
 """
 Darwin-specific functions for managing launch agents.
@@ -50,22 +51,14 @@ def remove(identifier: str, system_wide: bool = False) -> bool:
     system_wide: If True, the launch agent will be removed for all users on the system.
                  If False (default), the launch agent will be removed for the current user only.
 
-    Returns: True if the launch agent was found and successfully removed, False otherwise.
+    Returns: True if the startup script were removed, False otherwise.
     """
     # Remove plist and shell script files
     to_delete = [
         f'{_startup_folder(system_wide)}/{identifier}.plist',
         f'{_startup_folder(system_wide)}/{identifier}.sh'
     ]
-
-    try:
-        for file in to_delete:
-            os.remove(file)
-    except Exception as e:
-        print("autostarter - exception occured while removing launch agent: " + str(e))
-        return False
-    
-    return True
+    return remove_list(to_delete)
 
 def _startup_folder(system_wide: bool) -> str:
     """

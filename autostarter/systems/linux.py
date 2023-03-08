@@ -1,4 +1,5 @@
 import os
+from autostarter.util import remove_list
 
 """
 Linux-specific functions for managing startup scripts.
@@ -42,15 +43,14 @@ def remove(identifier: str, system_wide: bool = False) -> bool:
     system_wide: If True, the startup script will be removed for all users on the system.
                  If False (default), the startup script will be removed for the current user only.
 
-    Returns: True if the startup script was found and successfully removed, False otherwise.
+    Returns: True if the startup script were removed, False otherwise.
     """
     # Remove desktop and shell script files
     to_delete = [
         f'{_startup_folder(system_wide)}/{identifier}.sh',
         f'{_startup_folder(system_wide)}/{identifier}.desktop'
     ]
-
-    return all(os.remove(file) for file in to_delete)
+    return remove_list(to_delete)
 
 def _startup_folder(system_wide):
     """
